@@ -4,6 +4,7 @@ package com.grazielleanaia.openfeign_external_api.controller;
 import com.grazielleanaia.openfeign_external_api.business.UsuarioService;
 import com.grazielleanaia.openfeign_external_api.business.ViaCepService;
 import com.grazielleanaia.openfeign_external_api.business.dto.EnderecoDTO;
+import com.grazielleanaia.openfeign_external_api.business.dto.LoginDTO;
 import com.grazielleanaia.openfeign_external_api.business.dto.TelefoneDTO;
 import com.grazielleanaia.openfeign_external_api.business.dto.UsuarioDTO;
 import com.grazielleanaia.openfeign_external_api.infrastructure.client.ViaCepDTO;
@@ -38,10 +39,10 @@ public class UsuarioController {
 
 
     @PostMapping("/login")
-    public String login(@RequestBody UsuarioDTO usuarioDTO) {
+    public String login(@RequestBody LoginDTO loginDTO) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(usuarioDTO.getEmail(),
-                        usuarioDTO.getSenha()));
+                new UsernamePasswordAuthenticationToken(loginDTO.getEmail(),
+                        loginDTO.getSenha()));
         return "Bearer " + jwtUtil.generateToken(authentication.getName());
     }
 
